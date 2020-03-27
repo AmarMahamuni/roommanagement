@@ -63,6 +63,7 @@ public class UserController {
 
 	@GetMapping("/show")
 	public String show1() {
+		System.out.println("showwww.....");
 		return "hello";
 	}
 
