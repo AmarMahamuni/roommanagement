@@ -61,7 +61,7 @@ public class UserController {
 
 	}
 
-	@GetMapping("/me")
+	@GetMapping("/show")
 	public String show1() {
 		return "hello";
 	}
