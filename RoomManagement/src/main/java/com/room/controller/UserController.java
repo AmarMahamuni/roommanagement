@@ -62,6 +62,12 @@ public class UserController {
 	}
 
 	@GetMapping("/me")
+	public String show1() {
+		return "hello";
+	}
+
+	
+	@GetMapping("/me")
 	@ApiOperation(value = "Show curent logged user", notes = "Show curent logged user", response = UserModel.class)
 	public UserModel show() {
 		return user_service.loggedUser();
