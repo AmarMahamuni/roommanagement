@@ -84,7 +84,7 @@ public class UserService implements UserDetailsService {
 				+ "http://localhost:8080/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
 		send_email.sendmail(email_message);
 		System.out.println("tt" + confirmationToken.getConfirmationToken());
-		return new ResponseEntity<String>(HttpStatus.CREATED);
+		return new ResponseEntity(("Verification Link sent to Email: "+user.getEmail()+" please verify to active your account"), HttpStatus.OK);
 	}
 
 	// Email verification
@@ -115,7 +115,7 @@ public class UserService implements UserDetailsService {
 			final UserDetails userDetails = loadUserByUsername(email);
 			// System.out.println("uu" + userDetails);
 			final String jwt = jwtTokenUtil.generateToken(userDetails);
-			return ResponseEntity.ok(new AuthenticationResponse(jwt));
+			return ResponseEntity.ok( (jwt));
 		}
 		return new ResponseEntity(new CustomErrorType("User account: " + user.getEmail() + "is not yet activated "),
 				HttpStatus.PARTIAL_CONTENT);

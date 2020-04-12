@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.room.model.RoomModel;
+import com.room.model.UserModel;
 import com.room.service.RoomService;
 
 @RestController
@@ -27,9 +28,9 @@ public class RoomController {
 	private RoomService room_service;
 	
 	@PostMapping("/create")
-	public void create(@RequestBody RoomModel roomdetails) throws Exception
+	public ResponseEntity create(@RequestBody RoomModel roomdetails) throws Exception
 	{
-		room_service.createRoom(roomdetails);
+		return room_service.createRoom(roomdetails);
 	}
 	
 	
@@ -55,9 +56,9 @@ public class RoomController {
 	
 	
 	@GetMapping("/roomusers")
-	public void roomusers(){
+	public UserModel roomusers(){
 		System.out.println("roomco");
-		room_service.roomUsers();
+		return room_service.roomUsers();
 	}
 	
 /*	@GetMapping("/show/{id}")

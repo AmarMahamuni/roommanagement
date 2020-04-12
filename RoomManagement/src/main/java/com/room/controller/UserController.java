@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +40,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @Api(value = "UserRestController", description = "REST Apis related to UserModel Entity!!!!")
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:8100")
 public class UserController {
 
 	@Autowired
@@ -48,14 +51,14 @@ public class UserController {
 
 	// @Autowired
 	// private MyUserDetailsService userDetailsService;
-	@ApiOperation(value = "Create Account", notes = "Registraion of the user")
+	@ApiOperation(value = "Create Account", notes = "Registraion of the user" )
 	@PostMapping("/create-account")
 	public ResponseEntity create(@RequestBody UserModel user) throws AddressException, MessagingException, IOException {
 		// System.out.println("create con");
 		return user_service.createUser(user);
 	}
 
-	@RequestMapping(value = "/confirm-account")
+	@RequestMapping(value = "/confirm-account" ,  consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE  )
 	public ResponseEntity confirmUserAccount(@RequestParam("token") String confirmationToken) {
 		return user_service.confirmUserAccount(confirmationToken);
 

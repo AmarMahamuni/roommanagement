@@ -14,7 +14,7 @@ public interface UserJpaRepo extends JpaRepository<UserModel, Long>{
 
     //UserModel findByEmailIdIgnoreCase(String emailId);
 
-	List<RoomModel> findByRoom(RoomModel roomModel);
+	List<RoomModel> findByRoom(long l);
 
 
 }

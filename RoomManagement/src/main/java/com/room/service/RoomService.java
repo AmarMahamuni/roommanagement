@@ -41,7 +41,7 @@ public class RoomService {
 	
 	List<UserModel> list=new ArrayList<UserModel>();
 	
-	public ResponseEntity<String> createRoom(RoomModel room) throws Exception
+	public ResponseEntity createRoom(RoomModel room) throws Exception
 	{
 		try {
 			System.out.println("service"+ room);
@@ -68,7 +68,10 @@ public class RoomService {
 		System.out.println("rrr"+room.getUsers());
 		System.out.println("lllll");
 		list.forEach((use)->System.out.println(use));
-		return new ResponseEntity<String>( HttpStatus.CREATED);
+		System.out.println(new ResponseEntity(("Room is reated " 
+                ), HttpStatus.OK));
+		return new ResponseEntity(("Room: "+ room.getRoom_name()+" is created " 
+                ), HttpStatus.OK);
 
 	}
   
@@ -79,7 +82,7 @@ public class RoomService {
 		if(room==null)
 		{
 			System.out.println("join rooom null");
-			 return new ResponseEntity(new CustomErrorType("Room is not created or deleted " 
+			 return new ResponseEntity(new CustomErrorType("Room is not yet created or deleted " 
 	                  ), HttpStatus.NOT_FOUND);
 		}
 		UserModel user=user_service.loggedUser();
@@ -92,7 +95,7 @@ public class RoomService {
 		if(user.getRoom()!=null) {
 			System.out.println("join rooom is already there");
 
-			return new ResponseEntity(new CustomErrorType("User is already present in the other ROOM" 
+			return new ResponseEntity(new CustomErrorType("You are already present in the other ROOM" 
 	                  ), HttpStatus.CONFLICT);	
 		}
 		//System.out.println("user"+user);
@@ -102,7 +105,7 @@ public class RoomService {
 		room_repo.save(room);
 		user_repo.save(user);	
 		list.remove(user);
-		return new ResponseEntity(new CustomErrorType("User is joined the ROOM" 
+		return new ResponseEntity(("User is joined the ROOM" 
                 ), HttpStatus.OK);	
 
 	}
@@ -115,9 +118,9 @@ public UserModel roomUsers() {
 		System.out.println("userseee");
            System.out.println(user);
           // return user;
-           System.out.println("ur"+user.getRoom().getId());
-      System.out.println(user_repo.findByRoom(user.getRoom()));   
-      
+          // System.out.println("ur"+user.getRoom().getId());
+    System.out.println( user_repo.findByRoom(user.getRoom().getId())) ;
+     
  //     UserModel user1=  user_repo.findByRoom(user.getRoom().getId());
   //    System.out.println("uuu"+user1);
 	return null;      
