@@ -115,7 +115,8 @@ public class UserService implements UserDetailsService {
 			final UserDetails userDetails = loadUserByUsername(email);
 			// System.out.println("uu" + userDetails);
 			final String jwt = jwtTokenUtil.generateToken(userDetails);
-			return ResponseEntity.ok( (jwt));
+			return ResponseEntity.ok(new AuthenticationResponse(jwt));
+		
 		}
 		return new ResponseEntity(new CustomErrorType("User account: " + user.getEmail() + "is not yet activated "),
 				HttpStatus.PARTIAL_CONTENT);
