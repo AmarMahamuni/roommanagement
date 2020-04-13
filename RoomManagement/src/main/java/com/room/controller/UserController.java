@@ -40,7 +40,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @Api(value = "UserRestController", description = "REST Apis related to UserModel Entity!!!!")
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:8100")
+@CrossOrigin(origins = "https://roomcalulation.herokuapp.com/")
 public class UserController {
 
 	@Autowired
